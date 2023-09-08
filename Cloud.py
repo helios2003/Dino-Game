@@ -1,11 +1,15 @@
 import pygame as pg
 import os
+import random
 import GloDec as g
 
 class Cloud:
+    
+    Cloud_heights: list = [150, 175, 200, 225]
+
     def __init__(self, x: int):
         self.x = x
-        self.y = g.track_position - 150
+        self.y = g.track_position - random.choice(self.Cloud_heights)
         self.img = self.load_image()
         self.draw(g.screen)
         self.rect = self.img.get_rect()

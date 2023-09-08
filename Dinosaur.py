@@ -3,7 +3,7 @@ import os
 import GloDec as g
 
 class Dinosaur:
-    def __init__(self):
+    def __init__(self, x: int):
         # Load the images of the dinosaur
         self.duck_img = self.load_ducking_image()
         self.run_img = self.load_running_images()
@@ -20,6 +20,8 @@ class Dinosaur:
         self.jump_velocity: int = g.jump_velocity
 
         # The rect attribute is used to detect collisions
+        self.x = x
+        self.y = g.track_position - g.dino_height + 15
         self.rect: pg.Rect = self.img.get_rect()
         self.rect.x: int = g.dino_width
         self.rect.y: int = g.dino_height
@@ -28,7 +30,7 @@ class Dinosaur:
     def duck(self) -> None:
         self.img = self.duck_img[self.step_index // 5]
         self.rect = self.img.get_rect()
-        self.rect.x = g.dino_width
+        self.rect.x = g.dino_duck_width
         self.rect.y = g.dino_duck_height
         self.step_index += 1
 
@@ -81,23 +83,24 @@ class Dinosaur:
 
     # Drawing the dinosaur on the screen
     def draw(self, window: pg.Surface) -> None:
-        window.blit(self.img, (g.dino_width, g.dino_height))
+        window.blit(self.img, (self.x, self.y))
 
     # Loading the images of the dinosaur
     def load_jump_image(self) -> pg.Surface:
-        JUMPING = pg.image.load(os.path.join("assets", "Dino", "DinoJump.png"))
+        JUMPING = pg.transform.scale(pg.image.load(os.path.join("assets", "Dino", "DinoJump.png")), (g.dino_width, g.dino_height))
         return JUMPING
-    
+
     def load_ducking_image(self) -> list:
         DUCKING = [
-            pg.image.load(os.path.join("assets", "Dino", "DinoDuck1.png")),
-            pg.image.load(os.path.join("assets", "Dino", "DinoDuck2.png"))
+            pg.transform.scale(pg.image.load(os.path.join("assets", "Dino", "DinoDuck1.png")), (g.dino_duck_width, g.dino_duck_height)),
+            pg.transform.scale(pg.image.load(os.path.join("assets", "Dino", "DinoDuck2.png")), (g.dino_duck_width, g.dino_duck_height))
         ]
         return DUCKING
-    
+
     def load_running_images(self) -> list:
         RUNNING = [
-            pg.image.load(os.path.join("assets", "Dino", "DinoRun1.png")),
-            pg.image.load(os.path.join("assets", "Dino", "DinoRun2.png"))
+            pg.transform.scale(pg.image.load(os.path.join("assets", "Dino", "DinoRun1.png")), (g.dino_width, g.dino_height)),
+            pg.transform.scale(pg.image.load(os.path.join("assets", "Dino", "DinoRun2.png")), (g.dino_width, g.dino_height))
         ]
         return RUNNING
+

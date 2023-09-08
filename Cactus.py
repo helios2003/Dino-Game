@@ -5,7 +5,7 @@ import GloDec as g
 class Cactus:
     def __init__(self, x: int):
         self.x = x
-        self.y = g.track_position - g.cactus_height + 20
+        self.y = g.track_position - g.cactus_height + 10
         self.img = self.load_image()
         self.draw(g.screen)
         self.rect = self.img.get_rect()
