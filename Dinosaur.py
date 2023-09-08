@@ -4,10 +4,11 @@ import GloDec as g
 
 class Dinosaur:
     def __init__(self, x: int):
-        # Load the images of the dinosaur
+        # Load the assets of the dinosaur
         self.duck_img = self.load_ducking_image()
         self.run_img = self.load_running_images()
         self.jump_img = self.load_jump_image()
+        self.sound = self.load_sound()
 
         # By default we want the dinosaur to be only running
         self.is_running: bool = True
@@ -30,6 +31,8 @@ class Dinosaur:
     def duck(self) -> None:
         self.img = self.duck_img[self.step_index // 5]
         self.rect = self.img.get_rect()
+        self.x = g.dino_duck_width
+        self.y = g.track_position - g.dino_duck_height + 15
         self.rect.x = g.dino_duck_width
         self.rect.y = g.dino_duck_height
         self.step_index += 1
@@ -46,7 +49,8 @@ class Dinosaur:
     def jump(self) -> None:
         self.img = self.jump_img
         if self.is_jumping:
-            self.rect.y -= self.jump_velocity  # Decreasing the y-coordinate
+            self.y -= self.jump_velocity  # Decreasing the y-coordinate
+            self.rect.y = self.y
             self.jump_velocity -= g.gravity  # Decreasing the velocity while moving up
 
         # If we have reached the ground
@@ -61,6 +65,7 @@ class Dinosaur:
         elif self.is_running:
             self.run()
         elif self.is_jumping:
+            self.sound.play()
             self.jump()
 
         if self.step_index >= 10:
@@ -104,3 +109,7 @@ class Dinosaur:
         ]
         return RUNNING
 
+    # Loading the sound of the dinosaur jumping
+    def load_sound(self) -> pg.mixer.Sound:
+        self.sound = pg.mixer.Sound(os.path.join("assets", "Audio", "jump.wav"))
+        return self.sound

@@ -12,12 +12,17 @@ dino_width = 70
 dino_height = 75
 dino_duck_height = 50
 dino_duck_width = 75
-jump_velocity = 5
-gravity = 0.8
+jump_velocity = 8
+gravity = 0.5
 
 # Track constants
 track_position = 300
 track_height = 25
+
+# Score constants
+score_color = (0, 0, 0)
+score_x = 1025
+score_y = 20
 
 # Bird constants
 bird_width = 70
