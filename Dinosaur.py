@@ -22,7 +22,7 @@ class Dinosaur:
 
         # The rect attribute is used to detect collisions
         self.x = x
-        self.y = g.track_position - g.dino_height + 15
+        self.y = g.track_position - g.dino_height + 25
         self.rect: pg.Rect = self.img.get_rect()
         self.rect.x: int = g.dino_width
         self.rect.y: int = g.dino_height
@@ -32,7 +32,7 @@ class Dinosaur:
         self.img = self.duck_img[self.step_index // 5]
         self.rect = self.img.get_rect()
         self.x = g.dino_duck_width
-        self.y = g.track_position - g.dino_duck_height + 15
+        self.y = g.track_position - g.dino_duck_height + 25
         self.rect.x = g.dino_duck_width
         self.rect.y = g.dino_duck_height
         self.step_index += 1
@@ -57,6 +57,8 @@ class Dinosaur:
         if self.jump_velocity < -g.jump_velocity: 
             self.is_jumping = False
             self.jump_velocity = g.jump_velocity
+            self.y = g.track_position - g.dino_height + 25
+            self.rect.y = self.y
 
     # The update method is used to update the dinosaur's state based on the helper methods
     def update(self, Key: dict) -> None:
@@ -65,8 +67,8 @@ class Dinosaur:
         elif self.is_running:
             self.run()
         elif self.is_jumping:
-            self.sound.play()
             self.jump()
+            self.sound.play()
 
         if self.step_index >= 10:
             self.step_index = 0

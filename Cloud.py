@@ -4,7 +4,6 @@ import random
 import GloDec as g
 
 class Cloud:
-    
     Cloud_heights: list = [150, 175, 200, 225]
 
     def __init__(self, x: int):
@@ -19,6 +18,7 @@ class Cloud:
     # Drawing the cloud
     def draw(self, window: pg.Surface) -> None:
         window.blit(self.img, (self.x, self.y))
+        #window.blit(self.img, (self.x + g.SCREEN_WIDTH - 1, self.y))
 
     # Moving the cloud
     def move(self) -> None:
