@@ -1,11 +1,11 @@
-import pygame as pg
 import os
 import random
+import pygame as pg
 import GloDec as g
 
 class Bird:
 
-    Bird_heights: list = [125, 150, 160, 180] 
+    Bird_heights: list = [125, 150, 160, 180]
 
     def __init__(self, x: int):
         self.x = x
@@ -40,3 +40,4 @@ class Bird:
             pg.transform.scale(pg.image.load(os.path.join("assets", "Bird", "Bird2.png")), (g.bird_width, g.bird_height)),
         ]
         return FLYING
+

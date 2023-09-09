@@ -1,6 +1,6 @@
 import pygame as pg
 import os
-import GloDec as g
+import src.GloDec as g
 
 class Score:
     def __init__(self, initial_high_score: int):

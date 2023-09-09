@@ -1,12 +1,12 @@
 import pygame as pg
 import random
-import GloDec as g
-from Dinosaur import Dinosaur
-from Cloud import Cloud
-from Cactus import Cactus
-from Track import Track
-from Bird import Bird
-from Score import Score
+import src.GloDec as g
+from src.Dinosaur import Dinosaur
+from src.Cloud import Cloud
+from src.Cactus import Cactus
+from src.Track import Track
+from src.Bird import Bird
+from src.Score import Score
 
 # Initialize pygame
 pg.init()
