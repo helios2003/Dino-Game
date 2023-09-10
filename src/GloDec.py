@@ -5,14 +5,15 @@ SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 400
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 bg_color = (255, 255, 255)
-speed = 5
+speed = 8
+obstacles = []
 
 # Dinosaur constants
 dino_width = 70
 dino_height = 75
 dino_duck_height = 50
 dino_duck_width = 75
-jump_velocity = 10
+jump_velocity = 12
 gravity = 0.6
 
 # Track constants

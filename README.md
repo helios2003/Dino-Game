@@ -1,5 +1,5 @@
 # Dino-Game
-This is an implemnetaion of the famous Dino Game of Chrome browser in Python using Pygame.
+This is an implemnetation of the famous Dino Game of Chrome browser in Python using Pygame.
 
 ## Requirements
 * Python 3.x

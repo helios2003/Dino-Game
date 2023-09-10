@@ -1,7 +1,7 @@
 import os
 import random
 import pygame as pg
-import GloDec as g
+import src.GloDec as g
 
 class Bird:
 

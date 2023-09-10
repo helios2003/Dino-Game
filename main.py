@@ -17,11 +17,21 @@ pg.display.set_caption("Dinosaur Game")
 clock = pg.time.Clock()
 
 # Create game objects
-dinosaur = Dinosaur(20)
+dinosaur = Dinosaur(30)
 track = Track(0)
 score_display = Score(0)
-clouds = [Cloud(random.randint(800, 1600)) for _ in range(3)]  # Randomize the initial cloud positions
-cacti = [Cactus(random.randint(800, 1200)) for _ in range(3)]  # Randomize the initial cactus positions
+
+# Initialize variables for component generation
+cloud_timer = 0
+cloud_frequency = random.randint(200, 400)
+cactus_timer = 0
+cactus_frequency = random.randint(200, 300)
+
+# Lists to store components
+clouds = []
+cacti = []
+
+# Bird
 bird = Bird(1200)
 
 running = True
@@ -35,26 +45,35 @@ while running:
     dinosaur.update(keys)
     track.update()
 
-    # Check for collisions with cacti
-    for cactus in cacti:
-        if dinosaur.rect.colliderect(cactus.rect):
-            # Handle collision here, e.g., end the game or reset the score
-            score_display.reset_score()
-            running = False  # Stop the game when a collision occurs
+    # Cloud generation
+    if cloud_timer >= cloud_frequency:
+        new_cloud = Cloud(g.SCREEN_WIDTH)
+        clouds.append(new_cloud)
+        cloud_timer = 0
+        cloud_frequency = random.randint(200, 400)
+
+    cloud_timer += 1
+
+    # Cactus generation
+    if cactus_timer >= cactus_frequency:
+        new_cactus = Cactus(g.SCREEN_WIDTH)
+        cacti.append(new_cactus)
+        cactus_timer = 0
+        cactus_frequency = random.randint(200, 300)
+
+    cactus_timer += 1
 
     # Update cloud positions
     for cloud in clouds:
         cloud.move()
         if cloud.rect.right < 0:
-            cloud.rect.x = g.SCREEN_WIDTH + random.randint(800, 1600)
-            cloud.rect.y = g.track_position - random.choice(Cloud.Cloud_heights)
+            clouds.remove(cloud)
 
     # Update cactus positions
     for cactus in cacti:
         cactus.move()
         if cactus.rect.right < 0:
-            cactus.rect.x = g.SCREEN_WIDTH + random.randint(800, 1200)
-            cactus.rect.y = g.track_position - g.cactus_height + 10
+            cacti.remove(cactus)
 
     # Update bird position
     bird.move()
