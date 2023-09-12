@@ -5,7 +5,7 @@ import src.GloDec as g
 
 class Bird:
 
-    Bird_heights: list = [80, 100, 120, 140]
+    Bird_heights: list = [30, 50, 110, 125]
 
     def __init__(self, x: int):
         self.x = x
@@ -24,7 +24,7 @@ class Bird:
 
     def move(self) -> None:
         self.x -= g.bird_speed
-
+        # Cycle through the images of the bird to make it look like it is flying
         if self.step_index >= 40:
             self.step_index = 0
 

@@ -18,6 +18,10 @@ class Score:
     # Increasing the score
     def increase_score(self) -> None:
         self.score += 1
+        # Increasing the speed of the game as the score increases
+        if self.score % 200 == 0:
+            g.speed += 1
+            g.bird_speed += 1
 
     # Resetting the score when the game is over
     def reset_score(self) -> None:

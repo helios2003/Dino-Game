@@ -31,28 +31,28 @@ class Dinosaur:
     def duck(self) -> None:
         self.img = self.duck_img[self.step_index // 5]
         self.rect = self.img.get_rect()
-        self.x = g.dino_duck_width
         self.y = g.track_position - g.dino_duck_height + 25
-        self.rect.x = g.dino_duck_width
-        self.rect.y = g.dino_duck_height
+        #self.rect.x = g.dino_duck_width
+        self.rect.y = self.y
         self.step_index += 1
 
     # The run method is used to make the dinosaur run by default
     def run(self) -> None:
         self.img = self.run_img[self.step_index // 5]
         self.rect = self.img.get_rect()
-        self.rect.x = g.dino_width
-        self.rect.y = g.dino_height
+        self.rect.x = self.x
+        self.rect.y = self.y
         self.step_index += 1
 
     # The jump method is used to make the dinosaur jump if a cactus is present
     def jump(self) -> None:
         self.img = self.jump_img
+        self.rect.x = self.x
+        self.rect.y = self.y
         if self.is_jumping:
             if self.jump_velocity == g.jump_velocity: # If we are at the ground
                 self.sound.play()   
             self.y -= self.jump_velocity  # Decreasing the y-coordinate
-            self.rect.y = self.y
             self.jump_velocity -= g.gravity  # Decreasing the velocity while moving up
 
         # If we have reached the ground
@@ -60,7 +60,6 @@ class Dinosaur:
             self.is_jumping = False
             self.jump_velocity = g.jump_velocity
             self.y = g.track_position - g.dino_height + 25
-            self.rect.y = self.y
 
     # The update method is used to update the dinosaur's state based on the helper methods
     def update(self, Key: dict) -> None:

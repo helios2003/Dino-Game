@@ -19,7 +19,7 @@ class Game:
         # Create game objects
         self.dinosaur: Dinosaur = Dinosaur(30)
         self.track: Track = Track(0)
-        self.score_display: Score = Score()
+        self.score: Score = Score()
         self.die: Die = Die(False)
 
         self.cloud_timer: int = 0
@@ -54,7 +54,7 @@ class Game:
                     new_cloud = Cloud(g.SCREEN_WIDTH)
                     self.clouds.append(new_cloud)
                     self.cloud_timer = 0
-                    self.cloud_frequency = random.randint(200, 400)
+                    self.cloud_frequency = random.randint(100, 250)
 
                 self.cloud_timer += 1
 
@@ -74,7 +74,7 @@ class Game:
 
                 # Check for collision with obstacles
                 for obstacle in self.obstacles:
-                    if obstacle.collide(self.dinosaur.rect):
+                    if pg.Rect.colliderect(self.dinosaur.rect, obstacle.rect):
                         self.handle_collision()
 
                 for obstacle in self.obstacles:
@@ -98,8 +98,8 @@ class Game:
                 self.dinosaur.draw(self.screen)
 
                 # Increase the score
-                self.score_display.increase_score()
-                self.score_display.draw(self.screen)
+                self.score.increase_score()
+                self.score.draw(self.screen)
 
                 pg.display.flip()
                 self.clock.tick(60)
@@ -112,7 +112,7 @@ class Game:
 
     # Handle collision with obstacles
     def handle_collision(self) -> None:
-        self.score_display.reset_score()
+        self.score.reset_score()
         self.die.collided = True
         self.die.play_sound()
         self.running = False
