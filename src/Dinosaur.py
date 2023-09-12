@@ -49,6 +49,8 @@ class Dinosaur:
     def jump(self) -> None:
         self.img = self.jump_img
         if self.is_jumping:
+            if self.jump_velocity == g.jump_velocity: # If we are at the ground
+                self.sound.play()   
             self.y -= self.jump_velocity  # Decreasing the y-coordinate
             self.rect.y = self.y
             self.jump_velocity -= g.gravity  # Decreasing the velocity while moving up
@@ -68,7 +70,6 @@ class Dinosaur:
             self.run()
         elif self.is_jumping:
             self.jump()
-            self.sound.play()
 
         if self.step_index >= 10:
             self.step_index = 0

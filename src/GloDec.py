@@ -14,7 +14,7 @@ dino_height = 75
 dino_duck_height = 50
 dino_duck_width = 75
 jump_velocity = 12
-gravity = 0.6
+gravity = 0.7
 
 # Track constants
 track_position = 300

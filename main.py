@@ -70,11 +70,10 @@ while running:
     # Check for collisions with obstacles
     for obstacle in obstacles:
         if obstacle.collide(dinosaur.rect):
-            # Handle collision here, e.g., end the game or reset the score
             score_display.reset_score()
-            die.collided = True  # Set the collided state to True
-            die.play_sound()  # Play the sound when a collision occurs
-            running = False  # Stop the game when a collision occurs
+            die.collided = True  
+            die.play_sound() 
+            running = False 
 
     # Update positions of cacti and birds in the obstacles array
     for obstacle in obstacles:

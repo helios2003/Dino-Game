@@ -12,10 +12,10 @@ class Die:
         window.blit(self.img, (g.SCREEN_WIDTH // 2, g.SCREEN_HEIGHT // 2))
 
     def load_image(self) -> pg.Surface:
-        self.img = pg.image.load(os.path.join('Assets', 'GameOver.png'))
+        self.img = pg.image.load(os.path.join('assets', 'GameOver.png'))
         return self.img
         
     def play_sound(self):
-        sound = pg.mixer.Sound(os.path.join('Assets', 'Audio', 'die.wav'))
+        sound = pg.mixer.Sound(os.path.join('assets', 'Audio', 'die.wav'))
         sound.play()
     
