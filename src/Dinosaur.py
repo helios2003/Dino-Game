@@ -39,6 +39,7 @@ class Dinosaur:
     # The run method is used to make the dinosaur run by default
     def run(self) -> None:
         self.img = self.run_img[self.step_index // 5]
+        self.y = g.track_position - g.dino_duck_height
         self.rect = self.img.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
@@ -83,7 +84,7 @@ class Dinosaur:
             self.is_ducking = True
             self.is_running = False
 
-        elif not ((self.is_jumping is True or Key[pg.K_DOWN]) or (self.is_ducking is True or Key[pg.K_UP])):
+        elif not ((self.is_jumping is True or Key[pg.K_DOWN])):
             self.is_jumping = False
             self.is_ducking = False
             self.is_running = True

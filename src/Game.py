@@ -77,6 +77,7 @@ class Game:
                     if pg.Rect.colliderect(self.dinosaur.rect, obstacle.rect):
                         self.handle_collision()
 
+                # Update obstacle positions and remove them if they are off the screen
                 for obstacle in self.obstacles:
                     obstacle.move()
                     if obstacle.rect.right < 0:
@@ -114,5 +115,4 @@ class Game:
     def handle_collision(self) -> None:
         self.score.reset_score()
         self.die.collided = True
-        self.die.play_sound()
         self.running = False

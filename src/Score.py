@@ -20,6 +20,8 @@ class Score:
         self.score += 1
         # Increasing the speed of the game as the score increases
         if self.score % 200 == 0:
+            self.load_sound()
+            self.sound.play()
             g.speed += 1
             g.bird_speed += 1
 
@@ -29,7 +31,7 @@ class Score:
 
     # Updating the high score if the current score is greater than the high score
     def update_high_score(self) -> None:
-        self.sound.play()
+        #self.load_sound()
         if self.score > self.current_high_score:
             self.current_high_score = self.score
 
@@ -39,5 +41,5 @@ class Score:
     
     # Loading the sound of score when high score is updated
     def load_sound(self) -> pg.mixer.Sound:
-        self.sound = pg.mixer.Sound(os.path.join("assets", "Sound", "Score.wav"))
+        self.sound = pg.mixer.Sound(os.path.join("assets", "Audio", "high_score.wav"))
         return self.sound

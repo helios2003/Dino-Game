@@ -5,7 +5,7 @@ import src.GloDec as g
 
 class Bird:
 
-    Bird_heights: list = [30, 50, 110, 125]
+    Bird_heights: list = [30, 50, 70, 90, 110, 120]
 
     def __init__(self, x: int):
         self.x = x
