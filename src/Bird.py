@@ -5,7 +5,7 @@ import src.GloDec as g
 
 class Bird:
 
-    Bird_heights: list = [125, 150, 160, 180]
+    Bird_heights: list = [80, 100, 120, 140]
 
     def __init__(self, x: int):
         self.x = x
@@ -16,8 +16,8 @@ class Bird:
         self.rect = self.img.get_rect()
 
         self.step_index: int = 0
-        self.rect.x = x
-        self.rect.y = self.y
+        self.rect.x = self.x
+        self.rect.y = g.bird_height
 
     def draw(self, window: pg.Surface) -> None:
         window.blit(self.img, (self.x, self.y))
@@ -33,6 +33,11 @@ class Bird:
         self.rect.x = self.x
         self.rect.y = self.y
         self.step_index += 1
+
+    def collide(self, dinosaur: pg.Rect) -> bool:
+        if dinosaur.colliderect(self.rect):
+            return True
+        return False
 
     def load_images(self) -> list:
         FLYING = [

@@ -3,20 +3,17 @@ import os
 import src.GloDec as g
 
 class Score:
-    def __init__(self, initial_high_score: int):
+    def __init__(self):
         self.score: int = 0
         self.font: pg.font.Font = pg.font.SysFont('monospace', 22)
         self.x: int = g.score_x
         self.y: int = g.score_y
         self.color: tuple = g.score_color
-        self.current_high_score: int = initial_high_score
     
     # Drawing the score on the screen
     def draw(self, screen: pg.Surface) -> None:
         score_text = self.font.render(f"Score: {self.score}", True, self.color)
-        high_score_text = self.font.render(f"High Score: {self.current_high_score}", True, self.color)
         screen.blit(score_text, (self.x, self.y))
-        screen.blit(high_score_text, (self.x - 40, self.y + 30))
 
     # Increasing the score
     def increase_score(self) -> None:

@@ -6,13 +6,14 @@ import src.GloDec as g
 class Cactus:
     def __init__(self, x: int):
         self.x = x
-        self.y = g.track_position - g.cactus_height + 10
 
         # Randomly choose between large and small cactus
         if random.randint(0, 1) == 0:
             self.img = random.choice(self.load_large_cactus())
+            self.y = g.track_position - g.cactus_height
         else:
             self.img = random.choice(self.load_small_cactus())
+            self.y = g.track_position - g.cactus_height + 20
 
         self.draw(g.screen)
         self.rect = self.img.get_rect()
@@ -27,9 +28,11 @@ class Cactus:
     def move(self) -> None:
         self.x -= g.speed
         self.rect.x = self.x
-        if self.rect.x < -self.rect.width:
-            if g.obstacles:
-                g.obstacles.pop()
+
+    def collide(self, dinosaur: pg.Rect) -> bool:
+        if dinosaur.colliderect(self.rect):
+            return True
+        return False
 
     # Loading the images of the cacti
     def load_large_cactus(self) -> list:

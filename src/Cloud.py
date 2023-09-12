@@ -18,8 +18,7 @@ class Cloud:
     # Drawing the cloud
     def draw(self, window: pg.Surface) -> None:
         window.blit(self.img, (self.x, self.y))
-        #window.blit(self.img, (self.x + g.SCREEN_WIDTH - 1, self.y))
-
+        
     # Moving the cloud
     def move(self) -> None:
         self.x -= g.speed

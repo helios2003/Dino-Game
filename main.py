@@ -4,9 +4,10 @@ import src.GloDec as g
 from src.Dinosaur import Dinosaur
 from src.Cloud import Cloud
 from src.Cactus import Cactus
-from src.Track import Track
 from src.Bird import Bird
+from src.Track import Track
 from src.Score import Score
+from src.Die import Die
 
 # Initialize pygame
 pg.init()
@@ -19,20 +20,18 @@ clock = pg.time.Clock()
 # Create game objects
 dinosaur = Dinosaur(30)
 track = Track(0)
-score_display = Score(0)
+score_display = Score()
+die = Die(False)  # Create Die object with initial collided state as False
 
 # Initialize variables for component generation
 cloud_timer = 0
 cloud_frequency = random.randint(200, 400)
-cactus_timer = 0
-cactus_frequency = random.randint(200, 300)
+obstacle_timer = 0
+obstacle_frequency = random.randint(200, 300)
 
-# Lists to store components
+# Lists to store clouds and obstacles (cacti and birds)
 clouds = []
-cacti = []
-
-# Bird
-bird = Bird(1200)
+obstacles = []  # For cacti and birds
 
 running = True
 while running:
@@ -54,14 +53,34 @@ while running:
 
     cloud_timer += 1
 
-    # Cactus generation
-    if cactus_timer >= cactus_frequency:
-        new_cactus = Cactus(g.SCREEN_WIDTH)
-        cacti.append(new_cactus)
-        cactus_timer = 0
-        cactus_frequency = random.randint(200, 300)
+    # Obstacle generation (cacti and birds)
+    if obstacle_timer >= obstacle_frequency:
+        if not obstacles or obstacles[-1].x <= 250:
+            # Ensure a minimum distance of 150 pixels between obstacles
+            if random.randint(0, 1) == 0:
+                new_obstacle = Cactus(g.SCREEN_WIDTH)
+            else:
+                new_obstacle = Bird(g.SCREEN_WIDTH)
+            obstacles.append(new_obstacle)
+            obstacle_timer = 0
+            obstacle_frequency = random.randint(75, 100)
 
-    cactus_timer += 1
+    obstacle_timer += 1
+
+    # Check for collisions with obstacles
+    for obstacle in obstacles:
+        if obstacle.collide(dinosaur.rect):
+            # Handle collision here, e.g., end the game or reset the score
+            score_display.reset_score()
+            die.collided = True  # Set the collided state to True
+            die.play_sound()  # Play the sound when a collision occurs
+            running = False  # Stop the game when a collision occurs
+
+    # Update positions of cacti and birds in the obstacles array
+    for obstacle in obstacles:
+        obstacle.move()
+        if obstacle.rect.right < 0:
+            obstacles.remove(obstacle)
 
     # Update cloud positions
     for cloud in clouds:
@@ -69,26 +88,13 @@ while running:
         if cloud.rect.right < 0:
             clouds.remove(cloud)
 
-    # Update cactus positions
-    for cactus in cacti:
-        cactus.move()
-        if cactus.rect.right < 0:
-            cacti.remove(cactus)
-
-    # Update bird position
-    bird.move()
-    if bird.rect.right < 0:
-        bird.rect.x = g.SCREEN_WIDTH
-        bird.rect.y = random.randint(100, 150)
-
     # Renderings
     screen.fill(g.bg_color)
     track.draw(screen)
-    bird.draw(screen)
     for cloud in clouds:
         cloud.draw(screen)
-    for cactus in cacti:
-        cactus.draw(screen)
+    for obstacle in obstacles:
+        obstacle.draw(screen)
     dinosaur.draw(screen)
 
     # Increase the score
