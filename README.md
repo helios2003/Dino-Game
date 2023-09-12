@@ -21,10 +21,13 @@ git clone https://github.com/helios2003/Dino-Game.git
 
 ## Screenshots
 **1. Cactus as Obstacle**
+
 ![Cactus as Obstacle](screenshots/pic1.png)
 
 **2. Bird as Obstacle**
+
 ![Bird as Obstacle](screenshots/pic2.png)
 
 **3. Dinosaur Jumping**
+
 ![Dinosaur Jumping](screenshots/pic3.png)
