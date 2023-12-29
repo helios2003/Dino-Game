@@ -11,7 +11,7 @@ class Track:
         self.draw(g.screen)
 
     def load_image(self) -> pg.Surface:
-        self.img = pg.image.load(os.path.join("Assets", "Track.png"))
+        self.img = pg.image.load(os.path.join("assets", "Track.png"))
         self.img = pg.transform.scale(self.img, (g.SCREEN_WIDTH, g.track_height))
         return self.img
 

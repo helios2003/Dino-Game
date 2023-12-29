@@ -1,5 +1,6 @@
 import pygame as pg
 import random
+import asyncio
 import src.GloDec as g
 from src.Dinosaur import Dinosaur
 from src.Cloud import Cloud
@@ -34,7 +35,7 @@ class Game:
         self.paused: bool = False
 
     # Main game loop
-    def run(self) -> None:
+    async def run(self) -> None:
         while self.running:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -104,6 +105,7 @@ class Game:
 
                 pg.display.flip()
                 self.clock.tick(60)
+            await asyncio.sleep(0)
 
         pg.quit()
 

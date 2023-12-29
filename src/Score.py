@@ -5,7 +5,7 @@ import src.GloDec as g
 class Score:
     def __init__(self):
         self.score: int = 0
-        self.font: pg.font.Font = pg.font.SysFont('monospace', 22, bold=True)
+        self.font: pg.font.Font = pg.font.SysFont('arial', 22, bold=False)
         self.x: int = g.score_x
         self.y: int = g.score_y
         self.color: tuple = g.score_color
